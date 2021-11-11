@@ -1,0 +1,32 @@
+body {
+  background-color: #CCD0A6;
+}
+
+.App {
+  text-align: center;
+}
+
+.Search-Section {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 450px;
+  background-color: #47928E;
+  overflow: hidden;
+}
+
+.Media-Data {
+  position: absolute;
+  left: 450px;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+}
+
+.Default-Media-Data {
+  position: absolute;
+  top: calc(50% - 10px);
+  width: 100%;
+}

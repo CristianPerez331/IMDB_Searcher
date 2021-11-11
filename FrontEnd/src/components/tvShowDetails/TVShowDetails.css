@@ -1,0 +1,36 @@
+.TV-Show-Details {
+    overflow: auto;
+    height: 100%;
+}
+
+.TV-Show-Fan-Art {
+    width: 100%;
+    height: 200px;
+    background-position: center;
+}
+
+.TV-Show-Details-Right-Panel {
+    position:absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 400px;
+}
+
+.TV-Show-Details-Left-Panel {
+    padding: 25px;
+    padding-right: 415px;
+}
+
+.TV-Show-Details-Panels {
+    position: relative;
+}
+
+.TV-Show-Details-List {
+    padding: 4px 10px;
+    background-color: #ffe0b9;
+    margin-left: 5px;
+    margin-top: 8px;
+    display: inline-block;
+    border-radius: 15px;
+}

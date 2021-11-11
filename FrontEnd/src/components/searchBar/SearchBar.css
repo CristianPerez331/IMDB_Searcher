@@ -1,0 +1,33 @@
+.Search-Bar {
+    margin: 40px 80px;
+}
+
+.Search-Field input {
+    width: 180px;
+    height: 30px;
+    border: none;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-left: 5px;
+}
+
+.Search-Field input:focus-visible {
+    outline: none;
+}
+
+.Search-Field button {
+    height: 32px;
+    border: none;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.Search-Field button:hover {
+    cursor: pointer;
+}
+
+.Search-Error {
+    color: #ca1111;
+}

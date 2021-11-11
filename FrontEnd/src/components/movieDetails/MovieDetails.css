@@ -1,0 +1,36 @@
+.Movie-Details {
+    overflow: auto;
+    height: 100%;
+}
+
+.Movie-Fan-Art {
+    width: 100%;
+    height: 200px;
+    background-position: center;
+}
+
+.Movie-Details-Right-Panel {
+    position:absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 400px;
+}
+
+.Movie-Details-Left-Panel {
+    padding: 25px;
+    padding-right: 415px;
+}
+
+.Movie-Details-Panels {
+    position: relative;
+}
+
+.Movie-Details-List {
+    padding: 4px 10px;
+    background-color: #ffe0b9;
+    margin-left: 5px;
+    margin-top: 8px;
+    display: inline-block;
+    border-radius: 15px;
+}
