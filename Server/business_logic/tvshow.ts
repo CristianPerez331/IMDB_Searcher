@@ -11,12 +11,12 @@ class TVShowLogic {
 
             const movieData = await TVShowAccess.getTVShowsByTitle(req.params.tvShowTitle);
             
-            res.send(movieData.tv_results);
+            res.send(movieData.tv_results ?? []);
         } catch(error: any) {
             if (error?.message?.includes('TV Show Title Cannot Be Empty.')) {
                 res.status(StatusCodes.BAD_REQUEST).send(error.message);
             } else {
-                res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(error);
+                res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(error.message);
             }
         }
     }
@@ -39,10 +39,10 @@ class TVShowLogic {
 
             res.send(tvShowData as ITVShowData);
         } catch(error: any) {
-            if (error?.message?.includes('IMBD Id Cannot Be Empty.')) {
+            if (error?.message?.includes('IMDB Id Cannot Be Empty.')) {
                 res.status(StatusCodes.BAD_REQUEST).send(error.message);
             } else {
-                res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(error);
+                res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(error.message);
             }
         }
     }
@@ -54,7 +54,7 @@ class TVShowLogic {
 
     ensureTVShowId = (req: Request) => {
         if ((req?.params?.id ?? '').length <= 0)
-            throw new Error("IMBD Id Cannot Be Empty.");
+            throw new Error("IMDB Id Cannot Be Empty.");
     }
 }
 

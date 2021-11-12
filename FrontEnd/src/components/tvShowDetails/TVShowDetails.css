@@ -34,3 +34,9 @@
     display: inline-block;
     border-radius: 15px;
 }
+
+.Loading-Icon {
+    position: absolute;
+    top: calc(50% - 35px);
+    left: calc(50% - 35px);
+}

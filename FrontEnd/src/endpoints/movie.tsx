@@ -12,8 +12,8 @@ export const searchMovieTitle = async (movieTitle: string): Promise<IMovieSearch
     });
 }
 
-export const getMovieDetailsById = async (imbdId: string): Promise<IMovieDetails | null> => {
-    return axios.get(`http://localhost:8001/api/v1/movies/${imbdId}`)
+export const getMovieDetailsById = async (imdbId: string): Promise<IMovieDetails | null> => {
+    return axios.get(`http://localhost:8001/api/v1/movies/${imdbId}`)
     .then(function (response) {
         return response.data;
     })

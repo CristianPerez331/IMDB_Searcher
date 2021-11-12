@@ -9,13 +9,12 @@ class MediaLogic {
     getMediaDataByTitle = async (req: Request, res: Response): Promise<void> => {
         try {
             this.ensureTitle(req);
-
             const movieData = await MovieAccess.getMoviesByTitle(req.params.title);
             const tvShowData = await TVShowAccess.getTVShowsByTitle(req.params.title);
-            
+
             const mediaData = [
-                ...movieData.movie_results.map((movieResult) => ({ ...movieResult, type: 'Movie' })),
-                ...tvShowData.tv_results.map((tvResult) => ({
+                ...(movieData.movie_results ?? []).map((movieResult) => ({ ...movieResult, type: 'Movie' })),
+                ...(tvShowData.tv_results ?? []).map((tvResult) => ({
                     imdb_id: tvResult.imdb_id,
                     year: new Date(tvResult.release_date).getFullYear(),
                     title: tvResult.title,
@@ -28,7 +27,7 @@ class MediaLogic {
             if (error?.message?.includes('Movie/TV Show Title Cannot Be Empty.')) {
                 res.status(StatusCodes.BAD_REQUEST).send(error.message);
             } else {
-                res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(error);
+                res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(error.message);
             }
         }
     }

@@ -3,6 +3,7 @@ import { searchTitle } from "../../endpoints/media";
 import IMediaSearchResult from "../../interfaces/IMediaSearchResult";
 import { AttentionSeeker } from "react-awesome-reveal";
 import './SearchBar.css';
+import Loader from "react-loader-spinner";
 
 interface IProps {
   setSearchResults: Dispatch<SetStateAction<IMediaSearchResult[] | null>>;
@@ -12,15 +13,19 @@ const Header = (props: IProps) => {
 
   const [movieTitle, setMovieTitle] = useState<string>('');
   const [searchError, setSearchError] = useState<string>('');
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const search = () => {
     setSearchError('');
     props.setSearchResults(null);
 
+    setIsLoading(true);
     searchTitle(movieTitle).then((data) => {
       props.setSearchResults(data);
     }).catch((error) => {
       setSearchError(error.message);
+    }).finally(() => {
+      setIsLoading(false);
     });
   }
 
@@ -68,6 +73,16 @@ const Header = (props: IProps) => {
         { searchError && (
           <div className="Search-Error">{searchError}</div>
         )}
+        {isLoading &&
+          <div className="Loading-Icon">
+            <Loader
+              type="ThreeDots"
+              color="white"
+              height={70}
+              width={70}
+            />
+          </div>
+        }
       </div>
     </div>
   );

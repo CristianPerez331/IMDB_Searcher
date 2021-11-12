@@ -1,15 +1,17 @@
 {
-  "name": "movie_search_server",
+  "name": "imdb_search_server",
   "version": "1.0.0",
   "description": "Api to provide movie and tv show information and searching capabilities from imdb",
   "main": "index.ts",
   "scripts": {
-    "start": "ts-node index.ts"
+    "start": "ts-node index.ts",
+    "test": "jest"
   },
   "author": "Cristian Perez",
   "dependencies": {
     "axios": "^0.24.0",
     "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "http-status-codes": "^2.1.4",
     "nodemon": "^2.0.15",
@@ -18,6 +20,9 @@
   },
   "devDependencies": {
     "@types/cors": "^2.8.12",
-    "@types/express": "^4.17.13"
+    "@types/express": "^4.17.13",
+    "@types/jest": "^27.0.2",
+    "jest": "^27.3.1",
+    "ts-jest": "^27.0.7"
   }
 }

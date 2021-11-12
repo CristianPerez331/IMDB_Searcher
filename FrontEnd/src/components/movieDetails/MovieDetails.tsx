@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import IMovieDetails from '../../interfaces/IMovieDetails';
 import { getMovieDetailsById } from '../../endpoints/movie';
 import { Fade } from "react-awesome-reveal";
+import Loader from "react-loader-spinner";
 import './MovieDetails.css';
 
 interface IProps {
@@ -26,13 +27,23 @@ const MovieDetails = (props: IProps) => {
   }, [props.selectedMovieId]);
 
   const displayList = (list: string[]) => (
-    list.map((item) => (
+    list?.map((item) => (
       <span key={item} className="Movie-Details-List">{item}</span>
     ))
   );
 
   return (
     <>
+      {!movieDetails &&
+        <div className="Loading-Icon">
+          <Loader
+            type="ThreeDots"
+            color="black"
+            height={70}
+            width={70}
+          />
+        </div>
+      }
       {movieDetails && 
         <div className="Movie-Details">
           <div className="Movie-Fan-Art" style={{ backgroundImage: `url(${movieDetails.fanart})`}}/>
@@ -46,9 +57,14 @@ const MovieDetails = (props: IProps) => {
                 <hr />
                 <p>Movie Poster:</p>
                 <img className="Movie-Poster" width='300' src={movieDetails.poster}/>
-                <hr />
-                <p>Movie Trailer:</p>
-                <iframe className="Movie-Video" height="280" src={`http://www.youtube.com/embed/${movieDetails.youtube_trailer_key}`} width="350"></iframe>
+                
+                {movieDetails.youtube_trailer_key && (
+                  <>
+                    <hr />
+                    <p>Movie Trailer:</p>
+                    <iframe className="Movie-Video" height="280" src={`http://www.youtube.com/embed/${movieDetails.youtube_trailer_key}`} width="350"></iframe>
+                  </>
+                )}
               </div>
 
               <div className="Movie-Details-Left-Panel">

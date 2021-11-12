@@ -4,10 +4,6 @@ import { StatusCodes } from 'http-status-codes';
 import IMovieData from '../contracts/movies/IMovieData';
 
 class MovieLogic {
-
-    test = (req: Request, res: Response) => {
-        res.send("IT WORKED!");
-    }
     
     getMovieDataByTitle = async (req: Request, res: Response): Promise<void> => {
         try {
@@ -15,12 +11,12 @@ class MovieLogic {
 
             const movieData = await MovieAccess.getMoviesByTitle(req.params.movieTitle);
             
-            res.send(movieData.movie_results);
+            res.send(movieData.movie_results ?? []);
         } catch(error: any) {
             if (error?.message?.includes('Movie Title Cannot Be Empty.')) {
                 res.status(StatusCodes.BAD_REQUEST).send(error.message);
             } else {
-                res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(error);
+                res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(error.message);
             }
         }
     }
@@ -43,10 +39,10 @@ class MovieLogic {
 
             res.send(movieData as IMovieData);
         } catch(error: any) {
-            if (error?.message?.includes('IMBD Id Cannot Be Empty.')) {
+            if (error?.message?.includes('IMDB Id Cannot Be Empty.')) {
                 res.status(StatusCodes.BAD_REQUEST).send(error.message);
             } else {
-                res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(error);
+                res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(error.message);
             }
         }
     }
@@ -58,7 +54,7 @@ class MovieLogic {
 
     ensureMovieId = (req: Request) => {
         if ((req?.params?.id ?? '').length <= 0)
-            throw new Error("IMBD Id Cannot Be Empty.");
+            throw new Error("IMDB Id Cannot Be Empty.");
     }
 }
 

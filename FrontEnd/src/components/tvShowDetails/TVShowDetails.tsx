@@ -3,6 +3,7 @@ import { getTVShowDetailsById } from '../../endpoints/tvshow';
 import ITVShowDetails from '../../interfaces/ITVShowDetails';
 import { Fade } from "react-awesome-reveal";
 import './TVShowDetails.css';
+import Loader from 'react-loader-spinner';
 
 interface IProps {
   selectedTVShowId: string | null;
@@ -26,13 +27,23 @@ const TVShowDetails = (props: IProps) => {
   }, [props.selectedTVShowId]);
 
   const displayList = (list: string[]) => (
-    list.map((item) => (
+    list?.map((item) => (
       <span key={item} className="TV-Show-Details-List">{item}</span>
     ))
   );
 
   return (
     <>
+      {!tvShowDetails &&
+        <div className="Loading-Icon">
+          <Loader
+            type="ThreeDots"
+            color="black"
+            height={70}
+            width={70}
+          />
+        </div>
+      }
       {tvShowDetails && 
         <div className="TV-Show-Details">
           <div className="TV-Show-Fan-Art" style={{ backgroundImage: `url(${tvShowDetails.fanart})`}}/>
@@ -47,9 +58,13 @@ const TVShowDetails = (props: IProps) => {
                 <hr />
                 <p>Movie Poster:</p>
                 <img className="TV-Show-Poster" width='300' src={tvShowDetails.poster}/>
-                <hr />
-                <p>Movie Trailer:</p>
-                <iframe className="TV-Show-Video" height="280" src={`http://www.youtube.com/embed/${tvShowDetails.youtube_trailer_key}`} width="350"></iframe>
+                {tvShowDetails.youtube_trailer_key && (
+                  <>
+                    <hr />
+                    <p>Movie Trailer:</p>
+                    <iframe className="TV-Show-Video" height="280" src={`http://www.youtube.com/embed/${tvShowDetails.youtube_trailer_key}`} width="350"></iframe>
+                  </>
+                )}
               </div>
 
               <div className="TV-Show-Details-Left-Panel">
