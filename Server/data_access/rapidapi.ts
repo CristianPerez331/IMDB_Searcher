@@ -17,7 +17,6 @@ class RapidApi {
             if (response.data.status !== "OK") throw new Error(`API Error. ${response.data.status_message}`);
             return response.data;
         }).catch((error) => {
-            console.log(error.message);
             throw error;
         });
     }
